@@ -1,29 +1,46 @@
 pipeline {
-    agent { label "dev-server" }
-    stages{
-        stage("Clone Code"){
-            steps{
-                git url: "https://github.com/LondheShubham153/node-todo-cicd.git", branch: "master"
-            }
-        }
-        stage("Build and Test"){
-            steps{
-                sh "docker build . -t node-app-test-new"
-            }
-        }
-        stage("Push to Docker Hub"){
-            steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag node-app-test-new ${env.dockerHubUser}/node-app-test-new:latest"
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/node-app-test-new:latest"
+    agent any
+    
+    stages {
+        stage('Instalar Node.js y npm') {
+            steps {
+                script {
+                    // Instalar Node.js y npm
+                    sh 'sudo apt update && sudo apt install -y nodejs npm'
                 }
             }
         }
-        stage("Deploy"){
-            steps{
-                sh "docker-compose down && docker-compose up -d"
+
+        stage('Instalar Dependencias') {
+            steps {
+                script {
+                    // Instalar las dependencias del proyecto
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Iniciar la Aplicación') {
+            steps {
+                script {
+                    // Iniciar la aplicación Node.js
+                    sh 'node app.js &'
+                }
+            }
+        }
+
+        // Puedes agregar más etapas según sea necesario, como pruebas, construcción de artefactos, etc.
+
+        stage('Despliegue') {
+            steps {
+                script {
+                    // Agrega aquí los comandos de despliegue si es necesario
+                    // Pueden incluir la transferencia de archivos, reinicio de servicios, etc.
+                }
             }
         }
     }
+
+    
 }
+
