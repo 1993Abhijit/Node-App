@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools{
+        nodejs '21.4.0'
+    }
+    
+
     stages {
         stage('Checkout código desde GitHub') {
             steps {
@@ -15,6 +20,7 @@ pipeline {
             steps {
                 script {
                     // Navegar al directorio del proyecto y ejecutar npm install
+                    sh 'npm version'
                     sh 'npm install'
                 }
             }
