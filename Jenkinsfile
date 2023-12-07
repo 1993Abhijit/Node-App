@@ -1,12 +1,23 @@
 pipeline {
     agent any
-    
+
     stages {
+        stage('Checkout código desde GitHub') {
+            steps {
+                script {
+                    // Clonar el repositorio desde GitHub
+                    checkout scm
+                }
+            }
+        }
+
         stage('Instalar Node.js y npm') {
             steps {
                 script {
                     // Instalar Node.js y npm
-                   // sh 'sudo apt update && sudo apt install -y nodejs npm'
+                   //sh 'sudo apt update'
+                   /// sh 'sudo apt install -y nodejs'
+                   // sh 'sudo apt install -y npm'
                 }
             }
         }
@@ -14,32 +25,33 @@ pipeline {
         stage('Instalar Dependencias') {
             steps {
                 script {
-                    // Instalar las dependencias del proyecto
-                    sh 'npm install'
+                    // Navegar al directorio del proyecto y ejecutar npm install
+                    dir('/ruta/al/proyecto') {
+                        sh 'npm install'
+                    }
                 }
             }
         }
 
-        stage('Iniciar la Aplicación') {
+        stage('Iniciar Aplicación') {
             steps {
                 script {
-                    // Iniciar la aplicación Node.js
-                    sh 'node app.js &'
-                }
-            }
-        }
-
-        // Puedes agregar más etapas según sea necesario, como pruebas, construcción de artefactos, etc.
-
-        stage('Despliegue') {
-            steps {
-                script {
-                    // Agrega aquí los comandos de despliegue si es necesario
-                    // Pueden incluir la transferencia de archivos, reinicio de servicios, etc.
+                    // Navegar al directorio del proyecto y ejecutar node app.js
+                    dir('/ruta/al/proyecto') {
+                        sh 'node app.js &'
+                    }
                 }
             }
         }
     }
+
+    post {
+        always {
+            // Puedes agregar pasos adicionales o notificaciones aquí
+        }
+    }
+}
+
 
     
 }
