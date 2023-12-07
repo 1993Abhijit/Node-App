@@ -44,15 +44,5 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Puedes agregar pasos adicionales o notificaciones aquí
-        }
-    }
-}
-
-
-    
 }
 
