@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Navegar al directorio del proyecto y ejecutar node app.js
-                    dir('/ruta/al/proyecto') {
+                    // dir('/ruta/al/proyecto') {
                         sh 'node app.js &'
                     }
                 }
