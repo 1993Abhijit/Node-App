@@ -15,9 +15,7 @@ pipeline {
             steps {
                 script {
                     // Navegar al directorio del proyecto y ejecutar npm install
-                    dir('/ruta/al/proyecto') {
-                        sh 'npm install'
-                    }
+                    sh 'npm install'
                 }
             }
         }
@@ -26,12 +24,9 @@ pipeline {
             steps {
                 script {
                     // Navegar al directorio del proyecto y ejecutar node app.js
-                    // dir('/ruta/al/proyecto') {
-                        sh 'node app.js &'
-                    }
+                    sh 'node app.js &'
                 }
             }
         }
     }
 }
-
