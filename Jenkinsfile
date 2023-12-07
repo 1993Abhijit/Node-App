@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Instalar Node.js y npm
-                    sh 'sudo apt update && sudo apt install -y nodejs npm'
+                   // sh 'sudo apt update && sudo apt install -y nodejs npm'
                 }
             }
         }
