@@ -13,7 +13,7 @@ pipeline {
 
         stage('Instalar Node.js y npm') {
             steps {
-                script {
+                script { it ->
                     // Instalar Node.js y npm
                    //sh 'sudo apt update'
                    /// sh 'sudo apt install -y nodejs'
