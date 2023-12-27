@@ -3,7 +3,7 @@ pipeline {
 
     tools{
         nodejs '21.4.0'
-        Maven '3.9.6'
+        Maven 'Maven 3.9.6'
     }
     
 
