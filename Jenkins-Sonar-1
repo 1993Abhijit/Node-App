@@ -30,7 +30,7 @@ pipeline {
         stage('Scan') {
       steps {
         withSonarQubeEnv(installationName: 'SonarQube-Local') { 
-          sh 'mvn clean package sonar:sonar'
+          sh 'mvn -X clean package sonar:sonar'
         }
       }
     }
