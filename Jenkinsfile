@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Telegram configuration
-        TOKEN = credentials('telegram-api')
+        TOKEN = credentials('telegram_api')
         CHAT_ID = credentials('telegram_chatid')
     }
 
