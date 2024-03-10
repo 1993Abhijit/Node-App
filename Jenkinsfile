@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        // Telegram configuration
+        TOKEN = credentials('telegram-api')
+        CHAT_ID = credentials('telegram_chatid')
+    }
+
     tools{
         nodejs 'nodejs-21.4.0'
     }
