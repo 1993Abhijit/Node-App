@@ -60,7 +60,7 @@ pipeline {
     post {
         success {
             script {
-                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"✅ Deploy succeeded!\Authorized by ${USER_NAME}\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
+                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"✅ Deploy succeeded! Authorized by ${USER_NAME}\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
             }
         }
         failure {
