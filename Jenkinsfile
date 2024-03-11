@@ -5,7 +5,7 @@ pipeline {
         // Telegram configuration
         TOKEN = credentials('telegram_api')
         CHAT_ID = credentials('telegram_chatid')
-        USER_NAME = env.USER_NAME
+        USER_NAME = "${env.USER_NAME}"
     }
 
     tools{
