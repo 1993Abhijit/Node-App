@@ -5,6 +5,7 @@ pipeline {
         // Telegram configuration
         TOKEN = credentials('telegram_api')
         CHAT_ID = credentials('telegram_chatid')
+        USER_NAME = env.USER_NAME
     }
 
     tools{
@@ -59,12 +60,12 @@ pipeline {
     post {
         success {
             script {
-                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"Pipeline succeeded!\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
+                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"✅ Deploy succeeded!\Authorized by ${USER_NAME}\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
             }
         }
         failure {
             script {
-                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"Pipeline succeeded!\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
+                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"❌Deploy failure!\", \"disable_notification\": false}' \"https://api.telegram.org/bot${TOKEN}/sendMessage\""
             }
         }
     }
