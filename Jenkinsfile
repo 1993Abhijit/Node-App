@@ -50,8 +50,8 @@ pipeline {
             steps {
                 script {
                     // Navegar al directorio del proyecto y ejecutar node app.js
-                    //sh 'NODE_DEBUG=* node app.js'
-                    echo 'probe'
+                    sh 'NODE_DEBUG=* node app.js'
+                    //echo 'probe'
                 }
             }
         }
