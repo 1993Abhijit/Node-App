@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  Test:
 
     runs-on: ubuntu-latest
 
@@ -33,26 +33,27 @@ jobs:
     - name: Install dependencies 
       run: npm ci
     - name: Run build script inside package.json
-      run: npm run build --if-present
+      run: npm run build --if-present        
+    - name: Test  
+      run: npm test
 
-    - name: Start Node.js server
-      run: nohup node app.js &
+  to_dockerhub:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v3
+      name: Check out code
+
+    - uses: mr-smithers-excellent/docker-build-push@v6
+      name: Build & push Docker image
+      with:
+        image: sharker3312/nodeapp
+        tags: v1, latest
+        registry: docker.io
+        dockerfile: Dockerfile.ci
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+
       
-
-    - name: Delay for server startup
-      run: sleep 10s
-
-    - name: Check server status
-      run: curl -Is http://localhost:8000 | head -n 1 | grep 200
-      continue-on-error: true
-
-    - name: Detener el servidor
-      if: ${{ success() }}
-      run: kill $(lsof -t -i:${{8000}})
-
-    - name: Otro paso del flujo de trabajo
-      if: ${{ success() }}
-      run: echo "Continuar con el siguiente paso"
-        
-      
-    - run: npm test
