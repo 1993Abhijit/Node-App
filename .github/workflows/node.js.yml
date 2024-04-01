@@ -47,6 +47,8 @@ jobs:
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_CHANNEL: general
+        SLACK_MESSAGE: 'Mensaje de prueba'
 
   to_dockerhub:
     runs-on: ubuntu-latest
