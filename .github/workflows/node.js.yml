@@ -37,12 +37,6 @@ jobs:
     - name: Test  
       run: npm testsjgsjgsgdfg
       
-  slackNotification:
-    #name: Slack Notification
-    runs-on: ubuntu-latest
-    #needs: test
-    steps:
-    - uses: actions/checkout@v2
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
@@ -50,11 +44,14 @@ jobs:
         SLACK_CHANNEL: general
         SLACK_USERNAME: 'Node-Bot'
         #SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
-        SLACK_COLOR:  test.status
+        SLACK_COLOR:  ${{ job.status }}
         SLACK_MESSAGE_ON_SUCCESS: '🟢'
         SLACK_MESSAGE_ON_FAILURE: '🔴'
         SLACK_MESSAGE_ON_CANCEL: 'Cancel'
         SLACK_FOOTER: By Sharker3312
+      
+ 
+    
 
   to_dockerhub:
     runs-on: ubuntu-latest
