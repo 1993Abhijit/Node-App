@@ -35,7 +35,7 @@ jobs:
     - name: Run build script inside package.json
       run: npm run build --if-present        
     - name: Test  
-      run: npm test
+      run: npm testsjgsjgsgdfg
       
   slackNotification:
     #name: Slack Notification
@@ -49,8 +49,7 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: general
         SLACK_USERNAME: 'Node-Bot'
-        SLACK_MSG_AUTHOR: $GITHUB_ACTOR
-        SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
+        #SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
         SLACK_COLOR: ${{ job.status }}
         SLACK_MESSAGE_ON_SUCCESS: '🟢'
         SLACK_MESSAGE_ON_FAILURE: '🔴'
