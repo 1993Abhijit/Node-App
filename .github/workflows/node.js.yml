@@ -54,8 +54,8 @@ jobs:
         #SLACK_ICON_EMOJI: ':man_police_officer:'
         SLACK_TITLE: Workflow ${{ needs.test.result }}
         #SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
-        SLACK_MESSAGE_ON_SUCCESS: '🟢'
-        SLACK_MESSAGE_ON_FAILURE: '🔴'
+        SLACK_MESSAGE_ON_SUCCESS: '✅'
+        SLACK_MESSAGE_ON_FAILURE: '❌'
         SLACK_MESSAGE_ON_CANCEL: 'Cancel'
         SLACK_FOOTER: By Sharker3312
       
