@@ -35,7 +35,9 @@ jobs:
     - name: Run build script inside package.json
       run: npm run build --if-present        
     - name: Test  
-      run: npmhvg testsjgsjgsgdfg
+      run: npm tests
+    - name: failing step
+      run: exit 1
       
   on-failure:
     runs-on: ubuntu-latest
