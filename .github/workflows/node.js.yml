@@ -42,7 +42,7 @@ jobs:
   on-failure:
     runs-on: ubuntu-latest
     needs: test
-    if:  ${{ always() && (needs.test.result == 'failure' || needs.test.result == 'timed_out') }}
+    if:  always()
     steps:
     - uses: actions/checkout@v2
     - name: Slack Notification
