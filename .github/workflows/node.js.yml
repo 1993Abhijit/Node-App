@@ -35,7 +35,7 @@ jobs:
     - name: Run build script inside package.json
       run: npm run build --if-present        
     - name: Test  
-      run: npm test
+      run: npm testjhj
    
       
   on-failure:
@@ -51,7 +51,7 @@ jobs:
         SLACK_COLOR: ${{ needs.test.result }}
         SLACK_CHANNEL: general
         SLACK_USERNAME: 'Node-Bot'
-        SLACK_ICON_EMOJI: ':man_police_officer:'
+        #SLACK_ICON_EMOJI: ':man_police_officer:'
         SLACK_TITLE: Workflow ${{ needs.test.result }}
         #SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
         SLACK_MESSAGE_ON_SUCCESS: '🟢'
