@@ -37,6 +37,12 @@ jobs:
     - name: Test  
       run: npm testsjgsjgsgdfg
       
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ always() && (needs.test.result == 'failure' || needs.test.result == 'timed_out') }}
+    needs: test
+    steps:
+    - uses: actions/checkout@v2
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
