@@ -39,7 +39,7 @@ jobs:
       
   on-failure:
     runs-on: ubuntu-latest
-    if: always()
+    #if: always()
     needs: test
     steps:
     - uses: actions/checkout@v2
