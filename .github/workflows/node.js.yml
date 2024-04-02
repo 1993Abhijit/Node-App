@@ -39,8 +39,8 @@ jobs:
       
   on-failure:
     runs-on: ubuntu-latest
-    #if: always()
     needs: test
+    if: ${{ always() }
     steps:
     - uses: actions/checkout@v2
     - name: Slack Notification
