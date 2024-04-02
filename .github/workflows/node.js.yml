@@ -47,15 +47,16 @@ jobs:
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ test.status }}
         SLACK_CHANNEL: general
         SLACK_USERNAME: 'Node-Bot'
         SLACK_TITLE: Workflow ${{ needs.test.result }}
-        MSG_MINIMAL: actions url
+       # MSG_MINIMAL: actions url
         #SLACK_ICON: https://icons-for-free.com/iff/png/512/github+icon-1320168274457504277.png
         #SLACK_COLOR:  ${{ job.status }}
-        #SLACK_MESSAGE_ON_SUCCESS: '🟢'
-        #SLACK_MESSAGE_ON_FAILURE: '🔴'
-        #SLACK_MESSAGE_ON_CANCEL: 'Cancel'
+        SLACK_MESSAGE_ON_SUCCESS: '🟢'
+        SLACK_MESSAGE_ON_FAILURE: '🔴'
+        SLACK_MESSAGE_ON_CANCEL: 'Cancel'
         SLACK_FOOTER: By Sharker3312
       
  
