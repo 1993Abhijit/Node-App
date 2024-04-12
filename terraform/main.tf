@@ -6,8 +6,8 @@ provider "aws" {
 resource "aws_instance" "ec2_instance" {
   ami           = "ami-00cda30cf72311684" 
   instance_type = "t2.micro" 
-  key_name = ec2_key
-  security_groups = [module.security_group.security_group_id]             
+  key_name = "ec2_key"
+  security_groups = [module.security_group.ec2_security_group]             
 
   tags = {
     Name = "Nodeapp"
