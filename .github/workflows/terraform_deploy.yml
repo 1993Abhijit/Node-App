@@ -1,0 +1,40 @@
+name: Deploy Terraform AWS
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto al nombre de tu rama principal si es diferente
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.0  # Cambia la versión de Terraform según tus necesidades
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+
+    - name: Terraform Apply
+      #if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Solo aplicar en la rama main
+      run: terraform apply -auto-approve tfplan
+
+    - name: Terraform Destroy
+      if: github.event_name == 'pull_request'  # Destruir la infraestructura en PRs para evitar costos innecesarios
+      run: terraform destroy -auto-approve
+
+    - name: AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2  
