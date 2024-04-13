@@ -14,10 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Terraform check
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
@@ -33,10 +41,5 @@ jobs:
         working-directory: terraform
 
       - name: Terraform Apply
-        uses: kciter/terraform-apply-for-aws-action@v3
-        with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: us-east-2
-          variables: var=${{ github.sha }}
-          path: terraform
+        run: terraform apply
+        
