@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2_security_group" {
-  name        = "example-security-group"
+  name        = "ec2_ecurity-group"
   description = "Allow inbound traffic on port 8080 and SSH"
   
   ingress {
