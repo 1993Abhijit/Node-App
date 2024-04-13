@@ -1,33 +1,37 @@
 name: Deploy Infrastructure
 
 on:
-  push:
-    branches:
-      - master
+ push:
+  branches: [ "master" ]
+ pull_request:
+  branches: [ "master" ]
 
 jobs:
   tf-aws:
     name: Deploy Node app to aws
     runs-on: ubuntu-latest
-    working-directory: terraform
+    
 
     steps:
 
     - name: Terraform check
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       
 
-    - name: Terraform Init
-    - uses: hashicorp/setup-terraform@v3
+    - name: Terraform 
+      uses: hashicorp/setup-terraform@v3
       
     - name: Terraform Init
-       run: terraform init
+      run: terraform init
+      working-directory: terraform
     
     - name: Terraform Validate
-       run: terraform validate
+      run: terraform validate
+      working-directory: terraform
 
     - name: Terraform Plan
-       run: terraform plan
+      run: terraform plan
+      working-directory: terraform
 
     - name: Terraform Apply
       uses: kciter/terraform-apply-for-aws-action@v3
