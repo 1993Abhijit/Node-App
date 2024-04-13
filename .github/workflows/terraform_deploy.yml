@@ -1,44 +1,42 @@
 name: Deploy Infrastructure
 
 on:
- push:
-  branches: [ "master" ]
- pull_request:
-  branches: [ "master" ]
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   tf-aws:
-    name: Deploy Node app to aws
+    name: Deploy Node app to AWS
     runs-on: ubuntu-latest
-    
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Terraform check
-    - uses: actions/checkout@v4
-      
+      - name: Terraform check
+        uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform 
-      uses: hashicorp/setup-terraform@v3
-      
-    - name: Terraform Init
-      run: terraform init
-      working-directory: terraform
-    
-    - name: Terraform Validate
-      run: terraform validate
-      working-directory: terraform
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
 
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: terraform
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: terraform
 
-    - name: Terraform Apply
-      uses: kciter/terraform-apply-for-aws-action@v3
-      with:
-        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: us-east-2
-        variables: var=${{ github.sha }}
-        path: terraform
-        
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: terraform
+
+      - name: Terraform Apply
+        uses: kciter/terraform-apply-for-aws-action@v3
+        with:
+          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-2
+          variables: var=${{ github.sha }}
+          path: terraform
