@@ -42,4 +42,5 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply
+        working-directory: terraform
         
