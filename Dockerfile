@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Copiar los archivos necesarios de la aplicación al contenedor
 COPY package.json package-lock.json ./
 COPY app.js ./
-COPY /views ./ 
+COPY views ./ 
 
 # Instalar las dependencias de la aplicación
 RUN npm install
