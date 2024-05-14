@@ -1,9 +1,9 @@
 name: Deploy Node app 
 
-on:
-  push:
-    branches:
-      - master
+#on:
+  #push:
+    #branches:
+      #- master
 
 jobs:
   tf-aws:
@@ -43,3 +43,4 @@ jobs:
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve  
+        
