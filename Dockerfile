@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Copiar los archivos necesarios de la aplicación al contenedor
 COPY package.json package-lock.json ./
 COPY app.js ./
-COPY views ./ 
+COPY views ./views/
 
 # Instalar las dependencias de la aplicación
 RUN npm install
@@ -16,4 +16,4 @@ RUN npm install
 EXPOSE 8000
 
 # Comando para ejecutar la aplicación
-CMD ["npm", "start"] 
+CMD ["node", "app.js", "&"] 
