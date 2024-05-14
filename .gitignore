@@ -1,4 +1,5 @@
-
+terraform/.terraform/
+terraform/.terraform.lokc.hcl
 node_modules/
 deb
 echo

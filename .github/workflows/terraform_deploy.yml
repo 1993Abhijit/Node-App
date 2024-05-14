@@ -1,10 +1,7 @@
-name: Deploy Infrastructure
+name: Deploy Node app 
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
     branches:
       - master
 
@@ -15,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform
+        working-directory: terraform #Path directory
 
     steps:
 
@@ -39,7 +36,10 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan 
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve  
