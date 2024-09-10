@@ -1,19 +1,22 @@
-# Utilizar la imagen oficial de Node.js versión 18
-FROM node:18-alpine
-
-# Establecer el directorio de trabajo en el contenedor
+# Build stage
+FROM node:18-alpine AS builder
 WORKDIR /usr/src/app
-
-# Copiar los archivos necesarios de la aplicación al contenedor
-COPY package.json package-lock.json ./
+COPY package*.json ./
+RUN npm ci --only=prod
+RUN npm cache clean --force
 COPY app.js ./
 COPY views ./views/
 
-# Instalar las dependencias de la aplicación
-RUN npm install
+# Production stage
+FROM node:18-alpine
+ENV NODE_ENV production
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app .
+# Prune dependencies
+RUN npm prune --production
 
-# Exponer el puerto 8000
+# Remove unnecessary files
+RUN rm -rf /usr/src/app/npm-debug.log /usr/src/app/npm-error.log
+
 EXPOSE 8000
-
-# Comando para ejecutar la aplicación
-CMD ["node", "app.js", "&"] 
+CMD ["node", "app.js"]
